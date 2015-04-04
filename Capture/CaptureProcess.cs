@@ -114,15 +114,10 @@ namespace Capture
             if (this.Process == null)
                 return;
             IntPtr handle = this.Process.MainWindowHandle;
-            int i = 0;
-
-            while (!NativeMethods.IsWindowInForeground(handle))
+            
+          
+            if (!NativeMethods.IsWindowInForeground(handle))
             {
-                if (i == 0)
-                {
-                    // Initial sleep if target window is not in foreground - just to let things settle
-                    Thread.Sleep(250);
-                }
 
                 if (NativeMethods.IsIconic(handle))
                 {
@@ -143,13 +138,7 @@ namespace Capture
                     Thread.Sleep(1000);
                     return;
                 }
-
-                // Prevent an infinite loop
-                if (i > 120) // about 30secs
-                {
-                    throw new Exception("Could not set process window to the foreground");
-                }
-                i++;
+                
             }
         }
 
