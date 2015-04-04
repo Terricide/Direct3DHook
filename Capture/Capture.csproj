@@ -40,28 +40,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EasyHook">
-      <HintPath>..\bin\EasyHook.dll</HintPath>
+      <HintPath>..\depends\EasyHook\NetFX4.0\EasyHook.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\packages\SharpDX.2.4.2\lib\net40\SharpDX.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.D3DCompiler">
-      <HintPath>..\packages\SharpDX.D3DCompiler.2.4.2\lib\net40\SharpDX.D3DCompiler.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\SharpDX.D3DCompiler.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D10">
-      <HintPath>..\packages\SharpDX.Direct3D10.2.4.2\lib\net40\SharpDX.Direct3D10.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.Direct3D10.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11">
-      <HintPath>..\packages\SharpDX.Direct3D11.2.4.2\lib\net40\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11.Effects">
-      <HintPath>..\packages\SharpDX.Direct3D11.Effects.2.4.2\lib\net40\SharpDX.Direct3D11.Effects.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\SharpDX.Direct3D11.Effects.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
-      <HintPath>..\packages\SharpDX.Direct3D9.2.4.2\lib\net40\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI">
-      <HintPath>..\packages\SharpDX.DXGI.2.4.2\lib\net40\SharpDX.DXGI.dll</HintPath>
+      <HintPath>..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

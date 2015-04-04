@@ -72,7 +72,7 @@ namespace Capture.Hook.DX11
 
                 if (DeferredContext)
                 {
-                    _deviceContext.Rasterizer.SetViewports(new ViewportF(0, 0, _renderTarget.Description.Width, _renderTarget.Description.Height, 0, 1));
+                	_deviceContext.Rasterizer.SetViewports(new ViewportF[] { new ViewportF(0, 0, _renderTarget.Description.Width, _renderTarget.Description.Height, 0, 1) });
                     _deviceContext.OutputMerger.SetTargets(_renderTargetView);
                 }
 
@@ -117,7 +117,7 @@ namespace Capture.Hook.DX11
         {
             if (!DeferredContext)
             {
-                _deviceContext.Rasterizer.SetViewports(new ViewportF(0, 0, _renderTarget.Description.Width, _renderTarget.Description.Height, 0, 1));
+            	_deviceContext.Rasterizer.SetViewports(new ViewportF[] { new ViewportF(0, 0, _renderTarget.Description.Width, _renderTarget.Description.Height, 0, 1) } );
                 _deviceContext.OutputMerger.SetTargets(_renderTargetView);
             }
         }
