@@ -38,5 +38,6 @@ depends: $(SHARPDX_PACKAGES) EasyHook
 
 build:
 	$(MSBUILD) $(MSBUILD_OPTIONS) ./Direct3DHook.sln
+
 Capture/bin: build
 	

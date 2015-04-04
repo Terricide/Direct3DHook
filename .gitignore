@@ -4,3 +4,4 @@ Capture/obj
 TestScreenshot/obj
 bin
 depends/*
+./bin
