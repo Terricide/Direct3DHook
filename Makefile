@@ -17,7 +17,7 @@ WGET=curl -sL
 EASYHOOK_ZIP=EasyHook-2.7.5558.0-Binaries.zip
 EASYHOOK_URL=http://bit.ly/1FuD3cj
 
-all: clean bin
+all: clean depends bin
 
 clean:
 	rm -rf Capture/bin/* Capture/obj/*
@@ -35,7 +35,5 @@ EasyHook: $(EASYHOOK_ZIP)
 
 depends: $(SHARPDX_PACKAGES) EasyHook
 
-Direct3DHook.sln: depends
-
-bin: Direct3DHook.sln
+bin: Direct3DHook.sln 
 	$(MSBUILD) $(MSBUILD_OPTIONS) ./Direct3DHook.sln
