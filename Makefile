@@ -39,5 +39,12 @@ depends: $(SHARPDX_PACKAGES) EasyHook
 build:
 	$(MSBUILD) $(MSBUILD_OPTIONS) ./Direct3DHook.sln
 
-Capture/bin: build
+Capture/bin/*:
+	mkdir -pv Capture/bin/Debug Capture/bin/Release
+
+Capture/bin/*/EasyHook*.dll: Capture/bin/*
+	cp -aru depends/EasyHook/NetFX4.0/EasyHook* Capture/bin/Debug
+	cp -aru depends/EasyHook/NetFX4.0/EasyHook* Capture/bin/Release
+
+Capture/bin: build Capture/bin/*/EasyHook*.dll
 	
