@@ -46,6 +46,7 @@ $(EASYHOOK_PREFIX): $(EASYHOOK_ZIP)
 $(EASYHOOK_DLLS): $(EASYHOOK_PREFIX)
 
 $(NUGET):
+	mkdir -pv depends
 	$(WGET) $(NUGET_URL) > $(NUGET)
 	chmod +x $(NUGET)
 
