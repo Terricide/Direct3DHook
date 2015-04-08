@@ -1,10 +1,17 @@
+BIN_DIR=Capture/bin
+OBJ_DIR=Capture/obj
+LIB_DIR=Capture/lib
+OUTPUT_DIR=$(BIN_DIR)/Debug
+TARGET_DLL=$(OUTPUT_DIR)/Capture.dll
+
 FRAMEWORK_VERSION=v4.0.30319
 FRAMEWORK_ARCH=64
 
 MSBUILD=C:\Windows\Microsoft.NET\Framework$(FRAMEWORK_ARCH)\$(FRAMEWORK_VERSION)\msbuild.exe
 MSBUILD_OPTIONS=/m
 
-NUGET=nuget
+NUGET=depends/nuget.exe
+NUGET_URL=http://bit.ly/1yTJ1yy
 NUGET_INSTALL_OPTIONS=-o depends
 
 SHARPDX_VERSION=2.6.3
@@ -12,15 +19,18 @@ SHARPDX_PACKAGES=SharpDX.D3DCompiler SharpDX.Direct3D9 SharpDX.Direct3D10 SharpD
 SHARPDX_PLATFORM=DirectX11-Signed-net40
 
 UNZIP=7z -y x
-WGET=curl -sL
+WGET=wget -qO-
 
 EASYHOOK_ZIP=EasyHook-2.7.5558.0-Binaries.zip
 EASYHOOK_URL=http://bit.ly/1FuD3cj
+EASYHOOK_DIR=depends/EasyHook
+EASYHOOK_PREFIX=$(EASYHOOK_DIR)/NetFX4.0
+EASYHOOK_DLLS=$(EASYHOOK_PREFIX)/EasyHook.dll $(EASYHOOK_PREFIX)/EasyHook64.dll $(EASYHOOK_PREFIX)/EasyHook32.dll
 
-all: clean depends Capture/bin
+all: clean $(TARGET_DLL)
 
 clean:
-	rm -rf Capture/bin/* Capture/obj/*
+	rm -rf $(BIN_DIR)/* $(OBJ_DIR)/* $(LIB_DIR)/*
 
 SharpDX%: 
 	mkdir -p depends
@@ -29,22 +39,17 @@ SharpDX%:
 $(EASYHOOK_ZIP):
 	$(WGET) http://bit.ly/1FuD3cj > depends/$(EASYHOOK_ZIP)
 
-EasyHook: $(EASYHOOK_ZIP)
-	mkdir -p depends/EasyHook
-	cd depends/EasyHook && $(UNZIP) ../$(EASYHOOK_ZIP)
+$(EASYHOOK_PREFIX): $(EASYHOOK_ZIP)
+	mkdir -pv $(EASYHOOK_DIR)
+	cd $(EASYHOOK_DIR) && $(UNZIP) ../$(EASYHOOK_ZIP)
 
-depends: $(SHARPDX_PACKAGES) EasyHook
-	rm -rf Capture/bin/*
+$(EASYHOOK_DLLS): $(EASYHOOK_PREFIX)
 
-build:
+$(NUGET):
+	$(WGET) $(NUGET_URL) > $(NUGET)
+	chmod +x $(NUGET)
+
+depends: $(NUGET) $(SHARPDX_PACKAGES) $(EASYHOOK_DLLS)
+
+$(TARGET_DLL): depends
 	$(MSBUILD) $(MSBUILD_OPTIONS) ./Direct3DHook.sln
-
-Capture/bin/*:
-	mkdir -pv Capture/bin/Debug Capture/bin/Release
-
-Capture/bin/*/EasyHook*.dll: Capture/bin/*
-	cp -aru depends/EasyHook/NetFX4.0/EasyHook* Capture/bin/Debug
-	cp -aru depends/EasyHook/NetFX4.0/EasyHook* Capture/bin/Release
-
-Capture/bin: build Capture/bin/*/EasyHook*.dll
-	

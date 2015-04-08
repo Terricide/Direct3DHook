@@ -39,7 +39,8 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EasyHook">
+    <Reference Include="EasyHook, Version=2.7.5558.0, Culture=neutral, PublicKeyToken=4b580fca19d0b0c5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\depends\EasyHook\NetFX4.0\EasyHook.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
@@ -123,10 +124,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sharpdx_direct3d11_effects_x64.dll">
+    <Content Include="..\depends\EasyHook\NetFX4.0\EasyHook32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="sharpdx_direct3d11_effects_x86.dll">
+    <Content Include="..\depends\EasyHook\NetFX4.0\EasyHook64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\sharpdx_direct3d11_effects_x64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\depends\SharpDX.2.6.3\Bin\DirectX11_2-Signed-net40\sharpdx_direct3d11_effects_x86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
