@@ -11,18 +11,21 @@ MSBUILD=C:\Windows\Microsoft.NET\Framework$(FRAMEWORK_ARCH)\$(FRAMEWORK_VERSION)
 MSBUILD_OPTIONS=/m
 
 NUGET=depends/nuget.exe
-NUGET_URL=http://bit.ly/1yTJ1yy
+NUGET_URL=http://storage.googleapis.com/bundlecamp-static/ScreenshotToolLibs/NuGet.exe
 NUGET_INSTALL_OPTIONS=-o depends
 
 SHARPDX_VERSION=2.6.3
 SHARPDX_PACKAGES=SharpDX.D3DCompiler SharpDX.Direct3D9 SharpDX.Direct3D10 SharpDX.Direct3D11 SharpDX.Direct3D11.Effects SharpDX.DXGI
 SHARPDX_PLATFORM=DirectX11-Signed-net40
 
-UNZIP=7z -y x
-WGET=wget -qO-
+WGET_BINARY=depends/wget.exe
+WGET=$(WGET_BINARY) -qO
+
+7ZIP=depends/7z/x64/7za.exe
+UNZIP=$(7ZIP) -y x
 
 EASYHOOK_ZIP=EasyHook-2.7.5558.0-Binaries.zip
-EASYHOOK_URL=http://bit.ly/1FuD3cj
+EASYHOOK_URL=http://storage.googleapis.com/bundlecamp-static/ScreenshotToolLibs/EasyHook-2.7.5558.0-Binaries.zip
 EASYHOOK_DIR=depends/EasyHook
 EASYHOOK_PREFIX=$(EASYHOOK_DIR)/NetFX4.0
 EASYHOOK_DLLS=$(EASYHOOK_PREFIX)/EasyHook.dll $(EASYHOOK_PREFIX)/EasyHook64.dll $(EASYHOOK_PREFIX)/EasyHook32.dll
@@ -37,17 +40,17 @@ SharpDX%:
 	$(NUGET) install $(NUGET_INSTALL_OPTIONS) $@
 
 $(EASYHOOK_ZIP):
-	$(WGET) http://bit.ly/1FuD3cj > depends/$(EASYHOOK_ZIP)
+	$(WGET) depends/$(EASYHOOK_ZIP) $(EASYHOOK_URL)
 
 $(EASYHOOK_PREFIX): $(EASYHOOK_ZIP)
 	mkdir -pv $(EASYHOOK_DIR)
-	cd $(EASYHOOK_DIR) && $(UNZIP) ../$(EASYHOOK_ZIP)
+	cd $(EASYHOOK_DIR) && ../../$(UNZIP) ../$(EASYHOOK_ZIP)
 
 $(EASYHOOK_DLLS): $(EASYHOOK_PREFIX)
 
 $(NUGET):
 	mkdir -pv depends
-	$(WGET) $(NUGET_URL) > $(NUGET)
+	$(WGET) $(NUGET) $(NUGET_URL)
 	chmod +x $(NUGET)
 
 depends: $(NUGET) $(SHARPDX_PACKAGES) $(EASYHOOK_DLLS)
